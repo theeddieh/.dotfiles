@@ -7,7 +7,8 @@ fi
 
 #  git 
 ## auto complete
-source ~/.dotfiles/git/git-completion.bash
+## when git is installed via homebrew
+source /usr/local/etc/bash_completion.d/git-completion.bash
 ## posh-git in prompt
 source ~/.dotfiles/git/git-prompt.sh
 
