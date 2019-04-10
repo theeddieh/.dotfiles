@@ -1,7 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
 # Please adapt and uncomment the following lines:
-	name = theeddieh
+	name = Eddie Harrison
 	email = theeddieharrison@gmail.com
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -9,6 +9,7 @@
 	required = true
 
 [alias]
+	s = status -s
 	st = status
 	co = checkout
 	br = branch
