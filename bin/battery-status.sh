@@ -5,7 +5,7 @@
 # A quick little indicator for battery status on your Mac laptop, suitable for
 # display in your prompt.
 
-# Copied from ithub.com/ginatrapani/dotfiles/bin/battery-status
+# Copied from github.com/ginatrapani/dotfiles/bin/battery-status
 
 __battery_status()
 {
