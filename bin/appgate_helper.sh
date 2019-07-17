@@ -1,107 +1,4 @@
 #!/usr/bin/env bash
-#
-# other potentials names:
-#    - appgated
-#    - ag-helper
-#    - appgate-mngr
-#    - appgate-mgr
-#    - appgate-mgmt
-#    - appgate-ctl
-#    - apgtsdpctl
-#    - appctl
-#    - appgater
-
-# https://sdphelp.cyxtera.com/adminguide/v4.2/macos-client.html
-# https://sdphelp.cyxtera.com/userguide/v4.2/advanced/macos/index.html
-# https://sdpdownloads.cyxtera.com/files/download/AppGate-11.3-LTS/doc/manual_chunked_html/
-
-# https://stackoverflow.com/questions/918886/how-do-i-split-a-string-on-a-delimiter-in-bash
-# https://stackoverflow.com/questions/7568112/split-large-string-into-substrings
-# https://ilostmynotes.blogspot.com/2011/09/reading-and-modifying-os-x-plist-files.html
-
-# plist editors:
-# - /usr/bin/defaults
-# - /usr/bin/plutil
-# - /usr/libexec/PlistBuddy
-
-# SKIP the Data Usage User Approval screen:
-# ```  
-# $ defaults write com.cyxtera.appgate.sdp.service user_approval -bool YES
-# ```
-
-# SET the Controller URL: 
-# ```  
-# $ defaults write com.cyxtera.appgate.sdp.service controller_url <your_controller_url>
-# ```
-# Note: the controller url has to be prefixed with either "https://" or "appgate://" 
-# e.g.:
-# https://appgate.company.com appgate://appgate.company.com
-
-# SET the Identity Provider: 
-# ```  
-# $ defaults write com.cyxtera.appgate.sdp.service preferred_provider “myIdP_name” 
-# ```
-# Note: quotes should be used
-
-# LOGS
-# ~/.appgatesdp/log/log.log
-# - client
-# /var/log/appgate/tun-service.log
-# - tunnel service
-
-# MANUAL UNINSTALL
-# ```
-# sudo /Library/Application\ Support/AppGate/interactive-uninstall
-# ```
-
-# CLEAN ALL CLIENT SETTINGS
-# ```
-# rm -f ~/Library/Preferences/com.cyxtera.appgate.sdp.service.plist
-# rm -f ~/Library/Preferences/com.cyxtera.appgate.sdp.helper.plist
-# rm -f ~/Library/Preferences/com.cyxtera.appgate.sdp.plist
-# ```
-# - then reboot the computer
-
-# KILL PROCS
-# ```
-# pkill -9 -f 'AppGate SDP'
-# pkill -9 -f 'AppGate Service'
-# pkill -9 -f 'AppGate Driver'
-# ```
-# - from interactive-uninstall
-
-# START PROCS
-# ```
-# /Library/Application Support/AppGate/AppGate Driver -d -l /var/log/appgate/tun-service.log
-# ```
-# - from /Library/LaunchDaemons/com.cyxtera.appgate.sdp.tun.plist
-
-# ```
-# /Library/Application Support/AppGate/bootstrap
-# ```
-# - from /Library/LaunchAgents/com.cyxtera.appgate.sdp.client.agent.plist
-
-# LIST LOCAL FIREWALL RULES
-# ```
-# sudo pfctl -a com.cyxtera.appgate -sr
-# ```
-
-# FILE OF INTEREST
-
-## plists
-# - /Users/eharrison/Library/Preferences/com.cyxtera.appgate.sdp.helper.plist
-# - /Users/eharrison/Library/Preferences/com.cyxtera.appgate.sdp.plist
-# - /Users/eharrison/Library/Preferences/com.cyxtera.appgate.sdp.service.plist
-# - /Library/LaunchAgents/com.cyxtera.appgate.sdp.client.agent.plist
-# - /Library/LaunchAgents/com.cyxtera.appgate.sdp.helper.plist
-# - /Library/LaunchDaemons/com.cyxtera.appgate.sdp.tun.plist@  ->  /Library/Application Support/AppGate/com.cyxtera.appgate.sdp.tun.plist
-# - /Library/LaunchDaemons/com.cyxtera.appgate.sdp.updater.plist@  ->  /Library/Application Support/AppGate/com.cyxtera.appgate.sdp.updater.plist
-
-## helper scripts
-# - /Library/Application Support/AppGate/appgate-helper
-# - /Library/Application Support/AppGate/appgate-updater
-# - /Library/Application Support/AppGate/bootstrap
-# - /Library/Application Support/AppGate/interactive-uninstall
 
 # Binary names
 appgate_sdp="AppGate SDP"
@@ -109,7 +6,7 @@ appgate_sdp_helper="AppGate SDP Helper"
 appgate_service="AppGate Service"
 appgate_driver="AppGate Driver"
 
-# Helper paths
+# Helper path fragments
 applications="/Applications"
 library="/Library/Application Support"
 macos="Contents/MacOS"
@@ -119,7 +16,7 @@ helper_base="${appgate_base}/${frameworks}/${appgate_sdp_helper}.app"
 service_base="${library}/AppGate/${appgate_service}.app"
 driver_base="${library}/AppGate"
 
-# Full paths
+# Full paths to executables
 sdp="${appgate_base}/${macos}/${appgate_sdp}"
 hlp="${helper_base}/${macos}/${appgate_sdp_helper}"
 srv="${service_base}/${macos}/${appgate_service}"
@@ -178,6 +75,8 @@ decode_selected_provider(){
         | base64 -D \
         | hexdump -v -C
 }
+
+# WIP
 custom_decode_selected_provider(){
     defaults read com.cyxtera.appgate.sdp.service selected_provider \
         | base64 -D \
@@ -278,31 +177,3 @@ case ${command} in
         echo "unknown command ${command}"
         ;;
 esac
-
-  
-
-# if [ "$command" == "start" ]; then
-#     start_appgate
-# elif [ "$command" == "stop" ]; then
-#     stop_appgate
-# elif [ "$command" == "gov" ]; then
-#     stop_appgate
-#     set_gov_cloud
-#     start_appgate
-# elif [ "$command" == "com" ]; then
-#     stop_appgate
-#     set_com_cloud
-#     start_appgate
-# elif [ "$command" == "set-gov" ]; then
-#     set_gov_cloud
-# elif [ "$command" == "set-com" ]; then
-#     set_com_cloud
-# elif [ "$command" == "procs" ]; then
-#     check_appgate_processes
-# elif [ "$command" == "logs" ]; then
-#     check_appgate_logs
-# else
-#     check_appgate_config
-# fi
-
-
