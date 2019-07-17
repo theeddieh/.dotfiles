@@ -136,6 +136,25 @@ set_com_cloud(){
     defaults write com.cyxtera.appgate.sdp.service preferred_provider "FED_IPA"
 }
 
+show_usage(){
+    echo
+    echo "Usage:"
+    echo "  appgate [command]"
+    echo 
+    echo "Commands:"
+    echo "  gov         switch to GovCloud"
+    echo "  com         switch to ComCloud"
+    echo "  start       start AppGate client"
+    echo "  stop        stop AppGate client"
+    echo "  restart     restart AppGate client"
+    echo "  enable-gov  set GovCloud environment but do not switch"
+    echo "  enable-com  set ComCloud environment but do not switch"
+    echo "  procs       show all AppGate processes"
+    echo "  logs-wip    tail AppGate logs (WIP)"
+    echo "  config      print current AppGate configuration"
+    echo "  help        print this help message"
+}
+
 command=$1
 case ${command} in
     'gov' )
@@ -173,7 +192,10 @@ case ${command} in
     'config' )
         check_appgate_config
         ;;
+    'help' )
+        show_usage
+        ;;
     * )
-        echo "unknown command ${command}"
+        show_usage
         ;;
 esac
