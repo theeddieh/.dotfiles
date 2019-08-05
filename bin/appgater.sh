@@ -23,39 +23,38 @@ srv="${service_base}/${macos}/${appgate_service}"
 drv="${driver_base}/${appgate_driver}"
 
 binaries=(
-    "${appgate_sdp}" 
-    "${appgate_sdp_helper}" 
-    "${appgate_service}" 
+    "${appgate_sdp}"
+    "${appgate_sdp_helper}"
+    "${appgate_service}"
     "${appgate_driver}"
-    )
+)
 
 domains=(
     "com.cyxtera.appgate.sdp"
     "com.cyxtera.appgate.sdp.helper"
     "com.cyxtera.appgate.sdp.service"
-    )
+)
 
 maxwidth=60
 
-check_appgate_config(){
+check_appgate_config() {
     echo "[◆] AppGate configuration"
-    (
+    (   
         echo "DOMAIN KEY VALUE"
         echo "====== === ====="
-        for d in "${domains[@]}"; 
-        do 
-            values=$(defaults read $d | sed s'/[{="}]/ /g' )
+        for d in "${domains[@]}"; do
+            values=$(defaults read $d | sed s'/[{="}]/ /g')
             while IFS=';' read -a pairs; do
                 for p in "${pairs[@]}"; do
-                    if [[ ! -z "${p// }" ]]; then
+                    if [[ ! -z "${p// /}" ]]; then
                         pair=($p)
                         k=${pair[0]}
                         v=${pair[1]}
-                        if [[ ${#v} -gt ${maxwidth} ]]; then 
+                        if [[ ${#v} -gt ${maxwidth} ]]; then
                             # vs=( $(echo $v | fold -w${maxwidth} ))
                             # vs=( $(echo $v | base64 -D | fold -w${maxwidth} ))
                             # vs=( $(echo $v | base64 -D | hexdump -v -e '16/1 "'" "%_p" "'\n"' ))
-                            vs=( $(echo $v | base64 -D | hexdump -v -e '"%_p"' | sed -e "s/ /,/g" | fold -w${maxwidth} ))
+                            vs=($( echo $v | base64 -D | hexdump -v -e '"%_p"' | sed -e "s/ /,/g" | fold -w${maxwidth}))
                             echo $d $k ${vs[0]}
                             for s in "${vs[@]:1}"; do
                                 echo "." "." $s
@@ -70,23 +69,23 @@ check_appgate_config(){
     ) | column -t
 }
 
-decode_selected_provider(){
+decode_selected_provider() {
     defaults read com.cyxtera.appgate.sdp.service selected_provider \
         | base64 -D \
         | hexdump -v -C
 }
 
 # WIP
-custom_decode_selected_provider(){
+custom_decode_selected_provider() {
     defaults read com.cyxtera.appgate.sdp.service selected_provider \
         | base64 -D \
         | hexdump -v -e '"%08.8_ax  " 8/1 "%.2x " " " 8/1 " %.2x" "  |" 16/1 "%_p" "|" "\n"'
-        # | hexdump -v -e '"%08.8_ax  "  |" 16 "%_p" "|" "\n"'
-        # | hexdump -v -e '"%06.4_ad  " 22/1 "%_p" "\n"'
+    # | hexdump -v -e '"%08.8_ax  "  |" 16 "%_p" "|" "\n"'
+    # | hexdump -v -e '"%06.4_ad  " 22/1 "%_p" "\n"'
 }
 
 # WIP
-check_appgate_logs(){
+check_appgate_logs() {
     drv_log=~/.tun-service.labelled.log
     app_log=~/.log.labelled.log
 
@@ -103,44 +102,44 @@ check_appgate_logs(){
     # tail -n 40 ~/.appgate.log
 }
 
-check_appgate_processes(){
+check_appgate_processes() {
     echo "[◆] AppGate processes"
-    echo && ps -co time,pid,comm -p $(pgrep 'AppGate' )
+    echo && ps -co time,pid,comm -p $(pgrep 'AppGate')
     echo && pstree -w -g 2 -s "AppGate"
 }
 
-start_appgate(){
+start_appgate() {
     echo "[◆] Starting AppGate SDP"
     /Library/Application\ Support/AppGate/bootstrap
 }
 
-stop_appgate(){
+stop_appgate() {
     echo "[◆] Stopping AppGate SDP processes"
-    pids=$(pgrep -x 'AppGate SDP' 'AppGate SDP Helper' 'AppGate Service' )
+    pids=$(pgrep -x 'AppGate SDP' 'AppGate SDP Helper' 'AppGate Service')
     for p in ${pids[@]}; do
         target=$(ps -co pid=,comm= -p ${p})
-        echo "    sending TERM to process ${target}" 
+        echo "    sending TERM to process ${target}"
         kill -s TERM ${p}
     done
 }
 
-set_gov_cloud(){
+set_gov_cloud() {
     echo "[◆] Setting GovCloud environment"
     defaults write com.cyxtera.appgate.sdp.service controller_url "https://appgate-controller-0.identity.gov.msap.io/"
     defaults write com.cyxtera.appgate.sdp.service preferred_provider "GOV_IPA"
 }
 
-set_com_cloud(){
+set_com_cloud() {
     echo "[◆] Setting ComCloud environment"
     defaults write com.cyxtera.appgate.sdp.service controller_url "https://appgate-controller-0.identity.msap.io/"
     defaults write com.cyxtera.appgate.sdp.service preferred_provider "FED_IPA"
 }
 
-show_usage(){
+show_usage() {
     echo
     echo "Usage:"
     echo "  appgate [command]"
-    echo 
+    echo
     echo "Commands:"
     echo "  gov         switch to GovCloud"
     echo "  com         switch to ComCloud"
@@ -157,45 +156,45 @@ show_usage(){
 
 command=$1
 case ${command} in
-    'gov' )
+    'gov')
         stop_appgate
         set_gov_cloud
         start_appgate
         ;;
-    'com' )
+    'com')
         stop_appgate
         set_com_cloud
         start_appgate
         ;;
-    'start' )
+    'start')
         start_appgate
         ;;
-    'stop' )
+    'stop')
         stop_appgate
         ;;
-    'restart' )
+    'restart')
         stop_appgate
         start_appgate
         ;;
-    'enable-gov' )
+    'enable-gov')
         set_gov_cloud
         ;;
-    'enable-com' )
+    'enable-com')
         set_com_cloud
         ;;
-    'procs' )
+    'procs')
         check_appgate_processes
         ;;
-    'logs-wip' )
+    'logs-wip')
         check_appgate_logs
         ;;
-    'config' )
+    'config')
         check_appgate_config
         ;;
-    'help' )
+    'help')
         show_usage
         ;;
-    * )
+    *)
         show_usage
         ;;
 esac
