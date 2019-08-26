@@ -35,6 +35,12 @@ domains=(
     "com.cyxtera.appgate.sdp.service"
 )
 
+# Must specify these by filename, prefixed by ${driver_base}
+driver_domains=(
+    "com.cyxtera.appgate.sdp.tun"
+    "com.cyxtera.appgate.sdp.updater"
+)
+
 maxwidth=60
 
 check_appgate_config() {
@@ -63,6 +69,38 @@ check_appgate_config() {
                             for s in "${vs[@]:1}"; do
                                 echo "." "." $s
                             done
+                        else
+                            echo $d $k $v
+                        fi
+                    fi
+                done
+            done <<< "$values"
+        done
+
+        for d in "${driver_domains[@]}"; do
+            values=$(defaults read "${driver_base}/$d" | sed s'/[,;="{}]/ /g')
+            multivalue=1
+            while IFS=';' read -a pairs; do
+                for p in "${pairs[@]}"; do
+                    if [[ ! -z "${p// /}" ]]; then
+                        pair=($p)
+                        k=${pair[0]}
+                        v=${pair[1]}
+
+                        if [[ ${v} == "(" ]]; then
+                            multivalue=0
+                            echo $d $k "."
+                            continue
+                        fi
+
+                        if [[ ${k} == ")" ]]; then
+                            multivalue=1
+                            echo "." "." "."
+                            continue
+                        fi
+
+                        if [[ ${multivalue} == 0 ]]; then
+                            echo "." "." ${k}${v}
                         else
                             echo $d $k $v
                         fi
