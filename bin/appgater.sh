@@ -43,7 +43,7 @@ check_appgate_config() {
         echo "DOMAIN KEY VALUE"
         echo "====== === ====="
         for d in "${domains[@]}"; do
-            values=$(defaults read $d | sed s'/[{="}]/ /g')
+            values=$(defaults read "$d" | sed s'/[{="}]/ /g')
             while IFS=';' read -a pairs; do
                 for p in "${pairs[@]}"; do
                     if [[ ! -z "${p// /}" ]]; then
@@ -54,7 +54,11 @@ check_appgate_config() {
                             # vs=( $(echo $v | fold -w${maxwidth} ))
                             # vs=( $(echo $v | base64 -D | fold -w${maxwidth} ))
                             # vs=( $(echo $v | base64 -D | hexdump -v -e '16/1 "'" "%_p" "'\n"' ))
-                            vs=($( echo $v | base64 -D | hexdump -v -e '"%_p"' | sed -e "s/ /,/g" | fold -w${maxwidth}))
+                            vs=($( echo $v \
+                                    | base64 -D \
+                                    | hexdump -v -e '"%_p"' \
+                                    | sed -e "s/ /,/g" \
+                                    | fold -w${maxwidth}))
                             echo $d $k ${vs[0]}
                             for s in "${vs[@]:1}"; do
                                 echo "." "." $s
