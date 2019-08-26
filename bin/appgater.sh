@@ -169,12 +169,14 @@ set_gov_cloud() {
     echo "[◆] Setting GovCloud environment"
     defaults write com.cyxtera.appgate.sdp.service controller_url "https://appgate-controller-0.identity.gov.msap.io/"
     defaults write com.cyxtera.appgate.sdp.service preferred_provider "GOV_IPA"
+    lpass show --clip --password gov.msap.io
 }
 
 set_com_cloud() {
     echo "[◆] Setting ComCloud environment"
     defaults write com.cyxtera.appgate.sdp.service controller_url "https://appgate-controller-0.identity.msap.io/"
     defaults write com.cyxtera.appgate.sdp.service preferred_provider "FED_IPA"
+    lpass show --clip --password prod.identity.msap.io
 }
 
 show_usage() {
