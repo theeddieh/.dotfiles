@@ -3,21 +3,38 @@
 # Please adapt and uncomment the following lines:
 	name = Eddie Harrison
 	email = theeddieharrison@gmail.com
+[color]
+	ui = always
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	required = true
-
 [alias]
-	s = status -s
+	v  = version
+	s  = status -s
 	st = status
+	df = diff
+	dm = diff origin/master..HEAD
+
+	head    = rev-parse --short HEAD
+	prev    = log --pretty=medium --abbrev-commit -1
+	last    = log --pretty=format:\"%C(blue italic) %>(16)%ar %C(reset) %s\"
+	history = log --pretty=format:\"%C(yellow bold) %h %C(reset) %C(blue italic) %>(16)%ar %C(reset) %C(green dim) %<(16)%aN %C(reset) %s\"
+	grep2list = log --reverse --pretty=format:\"%h\" --grep 
+
+	up = pull origin master
+	br = branchgit verify-commit
 	co = checkout
-	br = branch
-	last = log -1 HEAD
-	history = log --pretty=format:\"%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(7)%aN%Cred%d %Creset%s\"
+	cs = commit --gpg-sign --message
+	fix-msg = commit --amend --gpg-sign
+	fix-gpg = commit --amend --gpg-sign --no-edit
+
+	alias = config --global --get-regexp alias.* 
+
 	viz = log --oneline --graph --all --decorate
 	release-report = log --pretty=format:\"%ad ∆ %s\" master..development
 	rr-short = log --pretty=format:\"%s\" master..development
-	head = rev-parse --short HEAD
 [core]
 	editor = nano
+[diff "sopsdiffer"]
+	textconv = sops -d
