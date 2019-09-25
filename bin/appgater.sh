@@ -57,9 +57,6 @@ check_appgate_config() {
                         k=${pair[0]}
                         v=${pair[1]}
                         if [[ ${#v} -gt ${maxwidth} ]]; then
-                            # vs=( $(echo $v | fold -w${maxwidth} ))
-                            # vs=( $(echo $v | base64 -D | fold -w${maxwidth} ))
-                            # vs=( $(echo $v | base64 -D | hexdump -v -e '16/1 "'" "%_p" "'\n"' ))
                             vs=($( echo $v \
                                     | base64 -D \
                                     | hexdump -v -e '"%_p"' \
@@ -152,7 +149,7 @@ check_appgate_processes() {
 
 start_appgate() {
     echo "[◆] Starting AppGate SDP"
-    /Library/Application\ Support/AppGate/bootstrap
+    "${driver_base}/bootstrap"
 }
 
 stop_appgate() {
@@ -165,24 +162,35 @@ stop_appgate() {
     done
 }
 
+copy_password() {
+    domain=${1}
+    echo "[◆] Copying AppGate password for ${domain} to clipboard"
+    lpass show --clip --password ${domain}
+}
+
 set_gov_cloud() {
-    echo "[◆] Setting GovCloud environment"
-    defaults write com.cyxtera.appgate.sdp.service controller_url "https://appgate-controller-0.identity.gov.msap.io/"
-    defaults write com.cyxtera.appgate.sdp.service preferred_provider "GOV_IPA"
-    lpass show --clip --password gov.msap.io
+    set_environment "GovCloud" "https://appgate-controller-0.identity.gov.msap.io/" "GOV_IPA" "gov.msap.io"
 }
 
 set_com_cloud() {
-    echo "[◆] Setting ComCloud environment"
-    defaults write com.cyxtera.appgate.sdp.service controller_url "https://appgate-controller-0.identity.msap.io/"
-    defaults write com.cyxtera.appgate.sdp.service preferred_provider "FED_IPA"
-    lpass show --clip --password prod.identity.msap.io
+    set_environment "ComCloud" "https://appgate-controller-0.identity.msap.io/" "FED_IPA" "prod.identity.msap.io"
+}
+
+# $1: name
+# $2: controller_url
+# $3: preferred_provider
+# $4: lastpass entry name/domain
+set_environment() {
+    echo "[◆] Setting ${1} environment"
+    defaults write com.cyxtera.appgate.sdp.service controller_url ${2}
+    defaults write com.cyxtera.appgate.sdp.service preferred_provider ${3}
+    copy_password ${4}
 }
 
 show_usage() {
     echo
     echo "Usage:"
-    echo "  appgate [command]"
+    echo "  apg [command]"
     echo
     echo "Commands:"
     echo "  gov         switch to GovCloud"
