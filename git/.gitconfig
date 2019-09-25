@@ -16,18 +16,24 @@
 	df = diff
 	dm = diff origin/master..HEAD
 
+	bn      = symbolic-ref --short HEAD
 	head    = rev-parse --short HEAD
 	prev    = log --pretty=medium --abbrev-commit -1
 	last    = log --pretty=format:\"%C(blue italic) %>(16)%ar %C(reset) %s\"
 	history = log --pretty=format:\"%C(yellow bold) %h %C(reset) %C(blue italic) %>(16)%ar %C(reset) %C(green dim) %<(16)%aN %C(reset) %s\"
 	grep2list = log --reverse --pretty=format:\"%h\" --grep 
 
-	up = pull origin master
-	br = branchgit verify-commit
-	co = checkout
-	cs = commit --gpg-sign --message
+	up   = !git pull origin $(git symbolic-ref --short HEAD)
+	send = !git push origin $(git symbolic-ref --short HEAD)
+	br   = branch
+	co   = checkout
+	a    = add
+	c    = commit --message
+	cs   = commit --gpg-sign --message
+	vc   = verify-commit
 	fix-msg = commit --amend --gpg-sign
 	fix-gpg = commit --amend --gpg-sign --no-edit
+
 
 	alias = config --global --get-regexp alias.* 
 
