@@ -36,8 +36,7 @@
 	fix-msg = commit --amend --gpg-sign
 	fix-gpg = commit --amend --gpg-sign --no-edit
 
-
-	alias = config --global --get-regexp alias.* 
+	alias = !(source ~/.dotfiles/git/aliases.sh && print_git_aliases)
 
 	viz = log --oneline --graph --all --decorate
 	release-report = log --pretty=format:\"%ad ∆ %s\" master..development
