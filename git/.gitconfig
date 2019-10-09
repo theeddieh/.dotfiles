@@ -26,7 +26,9 @@
 	up   = !git pull origin $(git symbolic-ref --short HEAD)
 	send = !git push origin $(git symbolic-ref --short HEAD)
 	br   = branch
+	cl   = clone
 	co   = checkout
+	cb   = checkout -b
 	a    = add
 	c    = commit --message
 	cs   = commit --gpg-sign --message
