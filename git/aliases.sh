@@ -13,3 +13,6 @@ print_git_aliases()  {
         | column -t \
         | sed 's/X/ /g'
 }
+
+alias git=hub
+alias g=git

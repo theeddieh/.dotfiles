@@ -1,47 +1,66 @@
 # This is Git's per-user configuration file.
+
 [user]
 # Please adapt and uncomment the following lines:
-	name = Eddie Harrison
-	email = theeddieharrison@gmail.com
+name = Eddie Harrison
+email = theeddieharrison@gmail.com
+
 [color]
-	ui = always
+ui = always
+
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+required = true
+
 [alias]
-	v  = version
-	s  = status -s
-	st = status
-	df = diff
-	dm = diff origin/master..HEAD
+v = version
+s = status -s
+st = status
+df = diff
+dm = diff origin/master..HEAD
 
-	bn      = symbolic-ref --short HEAD
-	head    = rev-parse --short HEAD
-	prev    = log --pretty=medium --abbrev-commit -1
-	last    = log --pretty=format:\"%C(blue italic) %>(16)%ar %C(reset) %s\"
-	history = log --pretty=format:\"%C(yellow bold) %h %C(reset) %C(blue italic) %>(16)%ar %C(reset) %C(green dim) %<(16)%aN %C(reset) %s\"
-	grep2list = log --reverse --pretty=format:\"%h\" --grep 
+yesterday = diff --summary --stat HEAD '@{1 day ago}'
+last-week = diff --summary --stat HEAD '@{1 week ago}'
+last-month = diff --summary --stat HEAD '@{1 month ago}'
 
-	up   = !git pull origin $(git symbolic-ref --short HEAD)
-	send = !git push origin $(git symbolic-ref --short HEAD)
-	br   = branch
-	cl   = clone
-	co   = checkout
-	cb   = checkout -b
-	a    = add
-	c    = commit --message
-	cs   = commit --gpg-sign --message
-	vc   = verify-commit
-	fix-msg = commit --amend --gpg-sign
-	fix-gpg = commit --amend --gpg-sign --no-edit
+head = rev-parse --short HEAD
+branch-name = symbolic-ref --short HEAD
+default-branch = !basename $(git symbolic-ref refs/remotes/origin/HEAD)
 
-	alias = !(source ~/.dotfiles/git/aliases.sh && print_git_aliases)
+prev = log --pretty=medium --abbrev-commit -1
+last = log --pretty=format:'%C(blue italic) %>(16)%ar %C(reset) %s'
 
-	viz = log --oneline --graph --all --decorate
-	release-report = log --pretty=format:\"%ad ∆ %s\" master..development
-	rr-short = log --pretty=format:\"%s\" master..development
+history = log --pretty=format:'%C(yellow bold) %h %C(reset) %C(blue italic) %>(16)%ar %C(reset) %C(green dim) %<(20)%aN %C(reset) %s'
+grep2list = log --reverse --pretty=format:'%h' --grep
+
+ft = fetch --prune origin
+up = !git pull origin $(git symbolic-ref --short HEAD)
+pu = !git push origin $(git symbolic-ref --short HEAD)
+rom = rebase --interactive origin/master
+
+br = branch
+cl = clone
+co = checkout
+cb = checkout -b
+
+a = add
+c = commit
+cs = commit --gpg-sign
+csm = commit --gpg-sign --message
+vc = verify-commit
+fix-msg = commit --amend --gpg-sign
+fix-gpg = commit --amend --gpg-sign --no-edit
+oops = commit --amend --gpg-sign --no-edit
+
+aliases = !(source ~/.dotfiles/git/aliases.sh && print_git_aliases)
+edit-config = !(v ~/.dotfiles/git/.gitconfig)
+
+viz = log --oneline --graph --all --decorate
+rr-short = log --pretty=format:'%s' master..development
+
 [core]
-	editor = nano
+editor = nano
+
 [diff "sopsdiffer"]
-	textconv = sops -d
+textconv = sops -d
