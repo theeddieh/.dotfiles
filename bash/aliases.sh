@@ -3,10 +3,10 @@
 alias bashedit='nano ~/.bash_profile'
 alias reload='source ~/.bash_profile'
 
-alias l='ls -Al -FGhoO'
-alias ls-cre='ls -Al -FGhoO -rtT -U'
-alias ls-acc='ls -Al -FGhoO -rtT -u'
-alias ls-mod='ls -Al -FGhoO -rtT'
+alias l='ls -Al -FGho'
+alias lt='ls -Al -FGho -rtT'
+alias lt-create='ls -Al -FGho -rtT -U'
+alias lt-access='ls -Al -FGho -rtT -u'
 alias ls-path='tr : \\'\n\\' <<<$PATH'
 
 alias today='date +"%Y/%m/%d"'
@@ -15,6 +15,8 @@ alias timestamp='date +"%Y%m%d_%H%M%S"'
 
 alias moon='curl wttr.in/moon'
 alias weather='curl wttr.in'
+
+alias bless-you='say --voice Anna gesundheit'
 
 # Simple default diff
 diffault() {
