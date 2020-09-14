@@ -6,7 +6,7 @@ telin() {
     if [[ "${2}" == "ops" ]] || [[ "${2}" == "hub" ]]; then
         cluster="opscenter"
     else
-        cluster="stable${2}"
+        cluster="${2}"
     fi
 
     telout ${tele_cmd}
@@ -17,13 +17,13 @@ telin() {
         --hub opscenter.${env}.msap.io \
         ${cluster}
 
-    # tsh login \
-    #     --debug \
-    #     --proxy opscenter.${env}.msap.io
+    tsh login \
+        --debug \
+        --proxy opscenter.${env}.msap.io
 }
 
 telout() {
-    # tsh  logout --debug
+    tsh  logout --debug
     tele logout --debug
 }
 

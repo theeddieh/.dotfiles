@@ -9,8 +9,8 @@
 namespace=${1+"--namespace ${1}"}
 
 (   
-    echo     "NAMESPACE SERVICE VERSION"
-    echo     "--------- ------- -------"
+    echo     "NAMESPACE SERVICE VERSION DATE"
+    echo     "--------- ------- ------- ----"
     helm ls ${namespace} --output json \
         | jq --slurp '[ .[0].Releases[]
             | .Namespace as $ns

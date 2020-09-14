@@ -9,6 +9,13 @@
 # alias logInPod='kubectl --namespace <namespace> exec -ti "$1" bash'
 # alias editDeploy='kubectl -n <namespace> edit deploy <namespace>-projects'
 
+alias k='kubectl'
+alias k-clusters='kubectl config get-clusters'
+alias k-contexts='kubectl config get-contexts'
+alias k-ctx='kubectl config current-context'
+alias k-switch='kubectl config use-context'
+alias gravsite='kubectl get pod --namespace kube-system --selector app=gravity-site --output wide'
+
 k-pods() {
     ns="--namespace ${1}"
     if [[ -z "${1}" ]]; then
