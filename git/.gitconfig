@@ -14,48 +14,55 @@ smudge = git-lfs smudge -- %f
 required = true
 
 [alias]
-v = version
-s = status -s
-st = status
-df = diff
-dm = diff origin/master..HEAD
+a = add
+d = diff
+b = branch
+c = commit --gpg-sign
+cl = clone
+co = checkout
+f = fetch origin
+s = status
+v = verify-commit
 
-yesterday = diff --summary --stat HEAD '@{1 day ago}'
-last-week = diff --summary --stat HEAD '@{1 week ago}'
-last-month = diff --summary --stat HEAD '@{1 month ago}'
+cb = checkout -b
+sc = switch -c
+up = ! git pull origin $(git symbolic-ref --short HEAD)
+pu = ! git push origin $(git symbolic-ref --short HEAD)
+
+refresh = ! source ~/.dotfiles/git/aliases.sh && refresh_master
+freshen = refresh
+prune = fetch orign --prune
 
 head = rev-parse --short HEAD
 branch-name = symbolic-ref --short HEAD
-default-branch = !basename $(git symbolic-ref refs/remotes/origin/HEAD)
+default-branch = ! basename $(git symbolic-ref refs/remotes/origin/HEAD)
 
-prev = log --pretty=medium --abbrev-commit -1
-last = log --pretty=format:'%C(blue italic) %>(16)%ar %C(reset) %s'
+previous = log --pretty=medium --abbrev-commit -1
+history = log --pretty=format:'%C(yellow bold)%h%C(reset)  %C(blue italic)%cI%C(reset)  %C(green dim)%<(16,trunc)%aN%C(reset) %C(red)%d%C(reset) %s'
+last = history -5
+list-hashes = log --pretty=format:'%h'
 
-history = log --pretty=format:'%C(yellow bold) %h %C(reset) %C(blue italic) %>(16)%ar %C(reset) %C(green dim) %<(20)%aN %C(reset) %s'
+rims = rebase --interactive master --exec 'git commit --amend --gpg-sign --no-edit --no-verify --reset-author'
+
+sign = commit --amend --no-edit --gpg-sign
+unsign = commit --amend --no-edit
+list-signed = ! source ~/.dotfiles/git/aliases.sh && list_signed_commits
+# exits with 0 if the given hash is signed
+is-signed = ! source ~/.dotfiles/git/aliases.sh && is_commit_signed
+
+# legacy aliases for muscle memory...
+fix-csm = commit --gpg-sign --message
+fix-gpg = commit --gpg-sign --amend --no-edit
+fix-msg = commit --gpg-sign --amend
+
+aliases = ! source ~/.dotfiles/git/aliases.sh && print_git_aliases
+edit-config = ! code ~/.dotfiles/git/.gitconfig
+
+df-master = diff origin/master..HEAD
+df-yesterday = diff --summary --stat HEAD '@{1 day ago}'
+list-status = ! source ~/.dotfiles/git/aliases.sh && list_status
+
 grep2list = log --reverse --pretty=format:'%h' --grep
-
-ft = fetch --prune origin
-up = !git pull origin $(git symbolic-ref --short HEAD)
-pu = !git push origin $(git symbolic-ref --short HEAD)
-rom = rebase --interactive origin/master
-
-br = branch
-cl = clone
-co = checkout
-cb = checkout -b
-
-a = add
-c = commit
-cs = commit --gpg-sign
-csm = commit --gpg-sign --message
-vc = verify-commit
-fix-msg = commit --amend --gpg-sign
-fix-gpg = commit --amend --gpg-sign --no-edit
-oops = commit --amend --gpg-sign --no-edit
-
-aliases = !(source ~/.dotfiles/git/aliases.sh && print_git_aliases)
-edit-config = !(v ~/.dotfiles/git/.gitconfig)
-
 viz = log --oneline --graph --all --decorate
 rr-short = log --pretty=format:'%s' master..development
 
