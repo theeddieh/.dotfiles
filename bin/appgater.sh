@@ -165,11 +165,17 @@ stop_appgate() {
 copy_password() {
     domain=${1}
     echo "[◆] Copying AppGate password for ${domain} to clipboard"
-    lpass show --clip --password ${domain}
+
+    if [[ $(which lpasss echo $? &> /dev/null) -eq 0 ]]; then
+        lpass show --clip --password ${domain}
+    else
+        echo "[!] Unable to fetch password from LastPass, try:"
+        echo "[!] brew install lastpass-cli"
+    fi
 }
 
 set_gov_cloud() {
-    set_environment "GovCloud" "https://appgate-controller-0.identity.gov.msap.io/" "GOV_IPA" "gov.msap.io"
+    set_environment "GovCloud" "https://appgate-controller-0.identity.gov.msap.io/" "GOV2_IPA" "gov.msap.io"
 }
 
 set_com_cloud() {
@@ -188,6 +194,7 @@ set_environment() {
 }
 
 show_usage() {
+    echo "apg: AppGate Assistant script"
     echo
     echo "Usage:"
     echo "  apg [command]"
@@ -195,13 +202,10 @@ show_usage() {
     echo "Commands:"
     echo "  gov         switch to GovCloud"
     echo "  com         switch to ComCloud"
-    echo "  start       start AppGate client"
     echo "  stop        stop AppGate client"
+    echo "  start       start AppGate client"
     echo "  restart     restart AppGate client"
-    echo "  enable-gov  set GovCloud environment but do not switch"
-    echo "  enable-com  set ComCloud environment but do not switch"
     echo "  procs       show all AppGate processes"
-    echo "  logs-wip    tail AppGate logs (WIP)"
     echo "  config      print current AppGate configuration"
     echo "  help        print this help message"
 }
@@ -228,23 +232,23 @@ case ${command} in
         stop_appgate
         start_appgate
         ;;
-    'enable-gov')
-        set_gov_cloud
-        ;;
-    'enable-com')
-        set_com_cloud
-        ;;
     'procs')
         check_appgate_processes
-        ;;
-    'logs-wip')
-        check_appgate_logs
         ;;
     'config')
         check_appgate_config
         ;;
     'help')
         show_usage
+        ;;
+    'enable-gov')
+        set_gov_cloud
+        ;;
+    'enable-com')
+        set_com_cloud
+        ;;
+    'logs-wip')
+        check_appgate_logs
         ;;
     *)
         show_usage
