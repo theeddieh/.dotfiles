@@ -5,7 +5,7 @@ MacOS Version: `10.14.6`
 
 ## Background Links
 - https://sdphelp.cyxtera.com/adminguide/v4.2/macos-client.html
-- https://sdphelp.cyxtera.com/userguide/v4.2/advanced/macos/index.html
+- https://sdphelp.appgate.com/userguide/v5.3/advanced/macos/index.html
 - https://sdpdownloads.cyxtera.com/files/download/AppGate-11.3-LTS/doc/manual_chunked_html/
 - https://stackoverflow.com/questions/918886/how-do-i-split-a-string-on-a-delimiter-in-bash
 - https://stackoverflow.com/questions/7568112/split-large-string-into-substrings
@@ -75,6 +75,18 @@ $ defaults write com.cyxtera.appgate.sdp.service controller_url <your_controller
 $ defaults write com.cyxtera.appgate.sdp.service preferred_provider “myIdP_name” 
 ```
 - Quotes should be used
+
+## SET Default Profiles
+```
+defaults write com.cyxtera.appgate.sdp.service default_profiles "appgate://profile1.com/foo;appgate://profile2.com/bar" 
+```
+- Each profile should be separated using a semicolon encapsulated in quotes: "``"
+
+## SET Attention Mode 
+```
+defaults write com.cyxtera.appgate.sdp attention_mode <ATTENTION_VALUE>
+```
+- Where ATTENTION_VALUE can be 0-2 (Low-Normal-High)
 
 ### MANUAL UNINSTALL
 ```

@@ -48,10 +48,10 @@ helper_scripts=(
 
 plist_files=(
     "${lib_preferences}/com.cyxtera.appgate.sdp.plist"
-    "${lib_preferences}/com.cyxtera.appgate.sdp.helper.plist"
     "${lib_preferences}/com.cyxtera.appgate.sdp.service.plist"
-    "${lib_agents}/com.cyxtera.appgate.sdp.client.agent.plist"
+    "${lib_preferences}/com.cyxtera.appgate.sdp.helper.plist"
     "${lib_agents}/com.cyxtera.appgate.sdp.helper.plist"
+    "${lib_agents}/com.cyxtera.appgate.sdp.client.agent.plist"
     "${lib_daemons}/com.cyxtera.appgate.sdp.tun.plist"
     "${lib_daemons}/com.cyxtera.appgate.sdp.updater.plist"
 )
@@ -156,7 +156,19 @@ check_appgate_config() {
 decode_selected_provider() {
     defaults read com.cyxtera.appgate.sdp.service selected_provider \
         | base64 -D \
-        | hexdump -v -C
+        | hexdump -e '64/1 "%_p" "\n"'
+}
+
+raw() {
+    for p in ${plist_files[@]}; do
+        f=$(basename ${p} | sed 's|.plist||')
+        echo "[ " ${f} " ]"
+        defaults read ${p}
+        if [[ "${f}" == "com.cyxtera.appgate.sdp.service" ]]; then
+            echo "base64 decoding selected_provider:"
+            decode_selected_provider
+        fi
+    done
 }
 
 # WIP
@@ -287,6 +299,9 @@ case ${command} in
         ;;
     'config')
         check_appgate_config
+        ;;
+    'raw')
+        raw
         ;;
     'tree')
         check_appgate_files
