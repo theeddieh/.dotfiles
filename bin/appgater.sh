@@ -62,10 +62,12 @@ domains=(
     "com.cyxtera.appgate.sdp.service"
 )
 
-# Must specify these by filename, prefixed by ${driver_base}
-driver_domains=(
-    "com.cyxtera.appgate.sdp.tun"
-    "com.cyxtera.appgate.sdp.updater"
+# Must read these with full path
+launch_domains=(
+    "${lib_agents}/com.cyxtera.appgate.sdp.client.agent.plist"
+    "${lib_agents}/com.cyxtera.appgate.sdp.helper.plist"
+    "${lib_daemons}/com.cyxtera.appgate.sdp.tun.plist"
+    "${lib_daemons}/com.cyxtera.appgate.sdp.updater.plist"
 )
 
 client_log="~/.appgatesdp/log/log.log"
@@ -116,10 +118,11 @@ check_appgate_config() {
             done <<< "$values"
         done
 
-        for d in "${driver_domains[@]}"; do
-            values=$(defaults read "${driver_base}/$d" | sed s'/[,;="{}]/ /g')
+        for d in "${launch_domains[@]}"; do
+            values=$(defaults read "${d}" | sed s'/[,;="{}]/ /g')
             multivalue=1
             while IFS=';' read -a pairs; do
+                d=$(basename $d | sed 's|.plist||')
                 for p in "${pairs[@]}"; do
                     if [[ ! -z "${p// /}" ]]; then
                         pair=($p)
