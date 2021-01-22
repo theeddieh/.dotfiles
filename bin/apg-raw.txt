@@ -1,0 +1,79 @@
+[  com.cyxtera.appgate.sdp  ]
+{
+    NSFullScreenMenuItemEverywhere = 0;
+    NSNavLastRootDirectory = "~/Documents";
+    NSNavLastUserSetHideExtensionButtonState = 0;
+    NSNavPanelExpandedSizeForSaveMode = "{712, 448}";
+    NSTreatUnknownArgumentsAsOpen = NO;
+}
+[  com.cyxtera.appgate.sdp.service  ]
+{
+    autostart = 1;
+    "case_insensitive_storage" = 1;
+    "controller_url" = "https://appgate-controller-0.identity.gov.msap.io/";
+    "display_name" = me;
+    "preferred_provider" = "GOV2_IPA";
+    profile = 1287728235;
+    "selected_provider" = "AAEAAAD/////AQAAAAAAAAAMAgAAAEpBcHBHYXRlIFNlcnZpY2UsIFZlcnNpb249NC4yLjIuMTU2MTcsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbAUBAAAAL1NoYXJlZC5DbGllbnQuVHlwZXMuUHJvdmlkZXIuQ3JlZGVudGlhbFByb3ZpZGVyBQAAAAtfcmVtZW1iZXJNZSZJZGVudGl0eVByb3ZpZGVyKzxOYW1lPmtfX0JhY2tpbmdGaWVsZC1JZGVudGl0eVByb3ZpZGVyKzxEaXNwbGF5TmFtZT5rX19CYWNraW5nRmllbGQpSWRlbnRpdHlQcm92aWRlcis8RGVmYXVsdD5rX19CYWNraW5nRmllbGQsSWRlbnRpdHlQcm92aWRlcis8UHJvdmlkZXJJZD5rX19CYWNraW5nRmllbGQAAQEAAwEBC1N5c3RlbS5HdWlkAgAAAAEGAwAAAAhHT1YyX0lQQQYEAAAACEdPVjJfSVBBAAT7////C1N5c3RlbS5HdWlkCwAAAAJfYQJfYgJfYwJfZAJfZQJfZgJfZwJfaAJfaQJfagJfawAAAAAAAAAAAAAACAcHAgICAgICAgIAAAAAAAAAAAAAAAAAAAAACw==";
+    "user_approval" = 1;
+}
+base64 decoding selected_provider:
+......................JAppGate Service, Version=4.2.2.15617, Cul
+ture=neutral, PublicKeyToken=null...../Shared.Client.Types.Provi
+der.CredentialProvider....._rememberMe&IdentityProvider+<Name>k_
+_BackingField-IdentityProvider+<DisplayName>k__BackingField)Iden
+tityProvider+<Default>k__BackingField,IdentityProvider+<Provider
+Id>k__BackingField........System.Guid...........GOV2_IPA......GO
+V2_IPA.......System.Guid....._a._b._c._d._e._f._g._h._i._j._k...
+....................................
+[  com.cyxtera.appgate.sdp.helper  ]
+{
+    NSFullScreenMenuItemEverywhere = 0;
+    NSScrollViewRubberbanding = 0;
+    NSTreatUnknownArgumentsAsOpen = NO;
+}
+[  com.cyxtera.appgate.sdp.helper  ]
+{
+    Label = "com.cyxtera.appgate.sdp.helper";
+    ProgramArguments =     (
+        sh,
+        "/Library/Application Support/AppGate/appgate-helper"
+    );
+    QueueDirectories =     (
+        "~/.appgatesdp/helper"
+    );
+    RunAtLoad = 1;
+}
+[  com.cyxtera.appgate.sdp.client.agent  ]
+{
+    Label = "com.cyxtera.appgate.sdp.client.agent";
+    ProgramArguments =     (
+        "/Library/Application Support/AppGate/bootstrap"
+    );
+    RunAtLoad = 1;
+}
+[  com.cyxtera.appgate.sdp.tun  ]
+{
+    Disabled = 0;
+    KeepAlive = 1;
+    Label = "com.cyxtera.appgate.sdp.tun";
+    ProgramArguments =     (
+        "/Library/Application Support/AppGate/AppGate Driver",
+        "-d",
+        "-l",
+        "/var/log/appgate/driver.log"
+    );
+    RunAtLoad = 1;
+}
+[  com.cyxtera.appgate.sdp.updater  ]
+{
+    Disabled = 0;
+    Label = "com.cyxtera.appgate.sdp.updater";
+    ProgramArguments =     (
+        "/Library/Application Support/AppGate/appgate-updater"
+    );
+    QueueDirectories =     (
+        "/tmp/.appgatesdp-updates"
+    );
+    RunAtLoad = 1;
+}
