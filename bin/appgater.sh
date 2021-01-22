@@ -9,7 +9,9 @@ bin_driver="AppGate Driver"
 # Helper path fragments
 app_base="/Applications/AppGate SDP.app"
 app_support_base="/Library/Application Support/AppGate"
-
+lib_preferences="/Users/eharrison/Library/Preferences"
+lib_agents="/Library/LaunchAgents"
+lib_daemons="/Library/LaunchDaemons"
 macos="Contents/MacOS"
 frameworks="Contents/Frameworks"
 
@@ -24,11 +26,34 @@ hlp="${helper_base}/${bin_sdp_helper}"
 srv="${service_base}/${bin_service}"
 drv="${driver_base}/${bin_driver}"
 
-binaries=(
-    "${bin_sdp}"
-    "${bin_sdp_helper}"
-    "${bin_service}"
-    "${bin_driver}"
+binary_paths=(
+    "${sdp}"
+    "${hlp}"
+    "${srv}"
+    "${drv}"
+)
+
+helper_scripts=(
+    "${app_support_base}/appgate-helper"
+    "${app_support_base}/appgate-updater"
+    "${app_support_base}/bootstrap"
+    "${app_support_base}/interactive-uninstall"
+    "${app_support_base}/osx/get_dns"
+    "${app_support_base}/osx/get_routes"
+    "${app_support_base}/osx/reset_dns"
+    "${app_support_base}/osx/reset_fw"
+    "${app_support_base}/osx/set_dns"
+    "${app_support_base}/osx/set_fw"
+)
+
+plist_files=(
+    "${lib_preferences}/com.cyxtera.appgate.sdp.plist"
+    "${lib_preferences}/com.cyxtera.appgate.sdp.helper.plist"
+    "${lib_preferences}/com.cyxtera.appgate.sdp.service.plist"
+    "${lib_agents}/com.cyxtera.appgate.sdp.client.agent.plist"
+    "${lib_agents}/com.cyxtera.appgate.sdp.helper.plist"
+    "${lib_daemons}/com.cyxtera.appgate.sdp.tun.plist"
+    "${lib_daemons}/com.cyxtera.appgate.sdp.updater.plist"
 )
 
 domains=(
@@ -43,17 +68,21 @@ driver_domains=(
     "com.cyxtera.appgate.sdp.updater"
 )
 
+client_log="~/.appgatesdp/log/log.log"
+tunnel_log="/var/log/appgate/tun-service.log"
+
+log_files=(
+    "${client_log}"
+    "${tunnel_log}"
+)
+
 maxwidth=60
 
 check_appgate_files() {
-    # tree -Q "${appgate_base}" \
-    #     "${helper_base}" \
-    #     "${service_base}" \
-    #     "${driver_base}"
-    which "${sdp}"
-    which "${hlp}"
-    which "${srv}"
-    which "${drv}"
+    (for p in "${binary_paths[@]}" "${helper_scripts[@]}" "${plist_files[@]}" "${log_files[@]}"; do
+        file --print0  "${p}"
+    done) | cut -d ":" -f 1,2
+
 }
 
 check_appgate_config() {
@@ -224,6 +253,7 @@ show_usage() {
     echo "  restart     restart AppGate client"
     echo "  procs       show all AppGate processes"
     echo "  config      print current AppGate configuration"
+    echo "  tree        check for AppGate binaries"
     echo "  help        print this help message"
 }
 

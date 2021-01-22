@@ -18,12 +18,20 @@ MacOS Version: `10.14.6`
     - `com.cyxtera.appgate.sdp.plist`
     - `com.cyxtera.appgate.sdp.helper.plist`
     - `com.cyxtera.appgate.sdp.service.plist`
+
 - `/Library/LaunchAgents/`
     - `com.cyxtera.appgate.sdp.client.agent.plist`
     - `com.cyxtera.appgate.sdp.helper.plist`
+
 - `/Library/LaunchDaemons/`
+    - `com.cyxtera.appgate.sdp.tun.plist@ ->`
+- `/Library/Application Support/AppGate/`
     - `com.cyxtera.appgate.sdp.tun.plist`
-    - `com.cyxtera.appgate.sdp.updater.plist`
+
+ - `/Library/LaunchDaemons/`
+   - `com.cyxtera.appgate.sdp.updater.plist@ ->`
+- `/Library/Application Support/AppGate/`
+  - `com.cyxtera.appgate.sdp.updater.plist`
 
 ### plist editors
 - `/usr/bin/defaults`
