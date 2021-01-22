@@ -1,0 +1,4 @@
+/Applications/AppGate SDP.app/Contents/MacOS/AppGate SDP
+/Applications/AppGate SDP.app/Contents/Frameworks/AppGate SDP Helper.app/Contents/MacOS/AppGate SDP Helper
+/Library/Application Support/AppGate/AppGate Service.app/Contents/MacOS/AppGate Service
+/Library/Application Support/AppGate/AppGate Driver
