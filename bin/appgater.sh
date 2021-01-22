@@ -1,32 +1,34 @@
 #!/usr/bin/env bash
 
 # Binary names
-appgate_sdp="AppGate SDP"
-appgate_sdp_helper="AppGate SDP Helper"
-appgate_service="AppGate Service"
-appgate_driver="AppGate Driver"
+bin_sdp="AppGate SDP"
+bin_sdp_helper="AppGate SDP Helper"
+bin_service="AppGate Service"
+bin_driver="AppGate Driver"
 
 # Helper path fragments
-applications="/Applications"
-library="/Library/Application Support"
+app_base="/Applications/AppGate SDP.app"
+app_support_base="/Library/Application Support/AppGate"
+
 macos="Contents/MacOS"
 frameworks="Contents/Frameworks"
-appgate_base="${applications}/${appgate_sdp}.app"
-helper_base="${appgate_base}/${frameworks}/${appgate_sdp_helper}.app"
-service_base="${library}/AppGate/${appgate_service}.app"
-driver_base="${library}/AppGate"
+
+appgate_base="${app_base}/${macos}"
+helper_base="${app_base}/${frameworks}/${bin_sdp_helper}.app/${macos}"
+service_base="${app_support_base}/${bin_service}.app/${macos}"
+driver_base="${app_support_base}"
 
 # Full paths to executables
-sdp="${appgate_base}/${macos}/${appgate_sdp}"
-hlp="${helper_base}/${macos}/${appgate_sdp_helper}"
-srv="${service_base}/${macos}/${appgate_service}"
-drv="${driver_base}/${appgate_driver}"
+sdp="${appgate_base}/${bin_sdp}"
+hlp="${helper_base}/${bin_sdp_helper}"
+srv="${service_base}/${bin_service}"
+drv="${driver_base}/${bin_driver}"
 
 binaries=(
-    "${appgate_sdp}"
-    "${appgate_sdp_helper}"
-    "${appgate_service}"
-    "${appgate_driver}"
+    "${bin_sdp}"
+    "${bin_sdp_helper}"
+    "${bin_service}"
+    "${bin_driver}"
 )
 
 domains=(
@@ -42,6 +44,17 @@ driver_domains=(
 )
 
 maxwidth=60
+
+check_appgate_files() {
+    # tree -Q "${appgate_base}" \
+    #     "${helper_base}" \
+    #     "${service_base}" \
+    #     "${driver_base}"
+    which "${sdp}"
+    which "${hlp}"
+    which "${srv}"
+    which "${drv}"
+}
 
 check_appgate_config() {
     echo "[◆] AppGate configuration"
@@ -166,11 +179,15 @@ copy_password() {
     domain=${1}
     echo "[◆] Copying AppGate password for ${domain} to clipboard"
 
-    if [[ $(which lpasss echo $? &> /dev/null) -eq 0 ]]; then
-        lpass show --clip --password ${domain}
-    else
-        echo "[!] Unable to fetch password from LastPass, try:"
+    if [[ $(which -s lpass) -ne 0 ]]; then
+        echo "[!] You need the LastPass CLI first, try:"
         echo "[!] brew install lastpass-cli"
+    elif [[ $(lpass status --quiet) -ne 0 ]]; then
+        echo "[!] You nedd to log in to LastPass first, try:"
+        echo "[!] lpass login theeddieharrison@gmail.com"
+    else
+        lpass sync
+        lpass show --clip --password ${domain}
     fi
 }
 
@@ -237,6 +254,9 @@ case ${command} in
         ;;
     'config')
         check_appgate_config
+        ;;
+    'tree')
+        check_appgate_files
         ;;
     'help')
         show_usage

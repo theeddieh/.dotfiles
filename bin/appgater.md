@@ -1,5 +1,8 @@
 # AppGate Helper Script Research
 
+AppGate SDP Version: `4.2.2-15617-release`
+MacOS Version: `10.14.6`
+
 ## Background Links
 - https://sdphelp.cyxtera.com/adminguide/v4.2/macos-client.html
 - https://sdphelp.cyxtera.com/userguide/v4.2/advanced/macos/index.html
