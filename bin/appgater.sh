@@ -81,10 +81,10 @@ log_files=(
 maxwidth=60
 
 check_appgate_files() {
-    (for p in "${binary_paths[@]}" "${helper_scripts[@]}" "${plist_files[@]}" "${log_files[@]}"; do
-        file --print0  "${p}"
-    done) | cut -d ":" -f 1,2
-
+    for p in "${binary_paths[@]}" "${helper_scripts[@]}" "${plist_files[@]}" "${log_files[@]}"; do
+        which -s "${p}"
+        echo $? " ${p}"
+    done
 }
 
 check_appgate_config() {
