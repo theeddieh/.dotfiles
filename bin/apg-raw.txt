@@ -6,6 +6,8 @@
 [  com.cyxtera.appgate.sdp.service  ]
 {
     autostart = 1;
+    "default_profiles" = "appgate://appgate-controller-0.identity.msap.io/eyJzcGEiOnsibW9kZSI6IlRDUCIsIm5hbWUiOiJVcGRhdGVkIiwia2V5IjoiY2JhNjJhNjE5Y2M1NzgwYzhjMTI3ODljMGQ2NzhiMWMxMDc1YWVkNmZkMDhjYjYzZThkNWIxZWNlZTFlNzdlOSJ9LCJjYUZpbmdlcnByaW50IjoiMmMwOGYwMTlkMmY0YzJjZjJkYzg5NmUyMTlmOTBlM2ZmZDQ2OGQxZWQyYjZlNDYwODFhOWE3YmNlYmFhMWM3NSIsImlkZW50aXR5UHJvdmlkZXJOYW1lIjoiRkVEX0lQQSJ9;appgate://appgate-controller-0.identity.gov.msap.io/eyJwcm9maWxlTmFtZSI6ImdvdjItaXBhIiwic3BhIjp7Im1vZGUiOiJUQ1AiLCJuYW1lIjoiZ292Mi1pcGEiLCJrZXkiOiIyMjdlMmIwODY5MGMzOTJkZDNlOGU1ODViMzM5ZGJmMGIyYTIwN2YwMzVmNjJhNDUyNzMxZDFjMTI4Y2QwMjA5In0sImNhRmluZ2VycHJpbnQiOiI3MzRkOTY1YTYxOWM3MTAwZDc3MWE5ZmQ5ZmJmMTFjMjk5ZmIxMzQ1NzBjMGQzYjIzM2QwODkzMGZjZjhiNTdlIiwiaWRlbnRpdHlQcm92aWRlck5hbWUiOiJHT1YyX0lQQSJ9";
+    profile = 1287728235;
     "user_approval" = 1;
 }
 base64 decoding selected_provider:
