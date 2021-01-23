@@ -1,41 +1,15 @@
 [  com.cyxtera.appgate.sdp  ]
 {
-    "ATTENTION_MODE" = 0;
     NSFullScreenMenuItemEverywhere = 0;
-    NSNavLastRootDirectory = "~/Documents";
-    NSNavLastUserSetHideExtensionButtonState = 0;
-    NSNavPanelExpandedSizeForSaveMode = "{712, 448}";
     NSTreatUnknownArgumentsAsOpen = NO;
-    "attention_mode" = 0;
 }
 [  com.cyxtera.appgate.sdp.service  ]
 {
-    autosaml = 1;
     autostart = 1;
-    "case_insensitive_storage" = 1;
-    "controller_url" = "https://appgate-controller-0.identity.gov.msap.io/";
-    "default_profiles" = "appgate://appgate-controller-0.identity.msap.io/eyJzcGEiOnsibW9kZSI6IlRDUCIsIm5hbWUiOiJVcGRhdGVkIiwia2V5IjoiY2JhNjJhNjE5Y2M1NzgwYzhjMTI3ODljMGQ2NzhiMWMxMDc1YWVkNmZkMDhjYjYzZThkNWIxZWNlZTFlNzdlOSJ9LCJjYUZpbmdlcnByaW50IjoiMmMwOGYwMTlkMmY0YzJjZjJkYzg5NmUyMTlmOTBlM2ZmZDQ2OGQxZWQyYjZlNDYwODFhOWE3YmNlYmFhMWM3NSIsImlkZW50aXR5UHJvdmlkZXJOYW1lIjoiRkVEX0lQQSJ9;appgate://appgate-controller-0.identity.gov.msap.io/eyJwcm9maWxlTmFtZSI6ImdvdjItaXBhIiwic3BhIjp7Im1vZGUiOiJUQ1AiLCJuYW1lIjoiZ292Mi1pcGEiLCJrZXkiOiIyMjdlMmIwODY5MGMzOTJkZDNlOGU1ODViMzM5ZGJmMGIyYTIwN2YwMzVmNjJhNDUyNzMxZDFjMTI4Y2QwMjA5In0sImNhRmluZ2VycHJpbnQiOiI3MzRkOTY1YTYxOWM3MTAwZDc3MWE5ZmQ5ZmJmMTFjMjk5ZmIxMzQ1NzBjMGQzYjIzM2QwODkzMGZjZjhiNTdlIiwiaWRlbnRpdHlQcm92aWRlck5hbWUiOiJHT1YyX0lQQSJ9";
-    "display_name" = me;
-    "preferred_provider" = "GOV2_IPA";
-    profile = "-2070994810";
-    "selected_provider" = "AAEAAAD/////AQAAAAAAAAAMAgAAAEpBcHBHYXRlIFNlcnZpY2UsIFZlcnNpb249NC4yLjIuMTU2MTcsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbAUBAAAAL1NoYXJlZC5DbGllbnQuVHlwZXMuUHJvdmlkZXIuQ3JlZGVudGlhbFByb3ZpZGVyBQAAAAtfcmVtZW1iZXJNZSZJZGVudGl0eVByb3ZpZGVyKzxOYW1lPmtfX0JhY2tpbmdGaWVsZC1JZGVudGl0eVByb3ZpZGVyKzxEaXNwbGF5TmFtZT5rX19CYWNraW5nRmllbGQpSWRlbnRpdHlQcm92aWRlcis8RGVmYXVsdD5rX19CYWNraW5nRmllbGQsSWRlbnRpdHlQcm92aWRlcis8UHJvdmlkZXJJZD5rX19CYWNraW5nRmllbGQAAQEAAwEBC1N5c3RlbS5HdWlkAgAAAAEGAwAAAAhHT1YyX0lQQQYEAAAACEdPVjJfSVBBAAT7////C1N5c3RlbS5HdWlkCwAAAAJfYQJfYgJfYwJfZAJfZQJfZgJfZwJfaAJfaQJfagJfawAAAAAAAAAAAAAACAcHAgICAgICAgIAAAAAAAAAAAAAAAAAAAAACw==";
     "user_approval" = 1;
 }
 base64 decoding selected_provider:
-......................JAppGate Service, Version=4.2.2.15617, Cul
-ture=neutral, PublicKeyToken=null...../Shared.Client.Types.Provi
-der.CredentialProvider....._rememberMe&IdentityProvider+<Name>k_
-_BackingField-IdentityProvider+<DisplayName>k__BackingField)Iden
-tityProvider+<Default>k__BackingField,IdentityProvider+<Provider
-Id>k__BackingField........System.Guid...........GOV2_IPA......GO
-V2_IPA.......System.Guid....._a._b._c._d._e._f._g._h._i._j._k...
-....................................
 [  com.cyxtera.appgate.sdp.helper  ]
-{
-    NSFullScreenMenuItemEverywhere = 0;
-    NSScrollViewRubberbanding = 0;
-    NSTreatUnknownArgumentsAsOpen = NO;
-}
 [  com.cyxtera.appgate.sdp.helper  ]
 {
     Label = "com.cyxtera.appgate.sdp.helper";
