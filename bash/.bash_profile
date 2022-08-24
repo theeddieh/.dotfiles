@@ -32,8 +32,8 @@ export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
 
 # eval "$(pyenv init -)"
 
-export GITHUB_TOKEN=$(grep password ~/.netrc | cut -d' ' -f 2)
-export MULETEER_TOKEN=$(grep token ~/.muleteer | cut -d' ' -f 2)
+# export GITHUB_TOKEN=$(grep password ~/.netrc | cut -d' ' -f 2)
+# export MULETEER_TOKEN=$(grep token ~/.muleteer | cut -d' ' -f 2)
 export EDITOR=nano
 
 ## via homebrew
