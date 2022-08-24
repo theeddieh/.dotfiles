@@ -42,7 +42,7 @@ echo "======= ======= =============" >> ${src_services_json}
 echo "PRODUCT SERVICE CHART_VERSION" >> ${src_services_json}
 echo "======= ======= =============" >> ${src_services_json}
 
-tele login --auth=Keycloak -o opscenter.${src_env}.msap.io ${src_cluster}
+telin ${src_env} ${src_cluster}
 __fetch_services ${src_services_json}
 
 # hacky header
@@ -51,7 +51,7 @@ echo "======= ======= =============" >> ${dst_services_json}
 echo "PRODUCT SERVICE CHART_VERSION" >> ${dst_services_json}
 echo "======= ======= =============" >> ${dst_services_json}
 
-tele login --auth=Keycloak -o opscenter.${dst_env}.msap.io ${dst_cluster}
+telin ${dst_env} ${dst_cluster}
 __fetch_services ${dst_services_json}
 
 column -t ${src_services_json} > ${src_services_list}

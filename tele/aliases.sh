@@ -1,5 +1,7 @@
 # tele login aliases
 
+
+# telin ${env} ${cluster}
 telin() {
     env=${1}
 
@@ -14,12 +16,12 @@ telin() {
     tele login \
         --debug \
         --auth Keycloak \
-        --hub opscenter.${env}.msap.io \
+        --hub opscenter.${env}.e.g.com \
         ${cluster}
 
     tsh login \
         --debug \
-        --proxy opscenter.${env}.msap.io
+        --proxy opscenter.${env}.e.g.com
 }
 
 telout() {
@@ -42,5 +44,5 @@ alias kgbuild='telin gbuild'
 alias kgstg='telin kgstg'
 alias kgprod='telin kgprod'
 
-alias tele-env='tele status | grep "opscenter.[a-z-]*.msap.io" --only-matching | cut -d "." -f 2'
+alias tele-env='tele status | grep "opscenter.[a-z-]*.e.g.com" --only-matching | cut -d "." -f 2'
 alias tele-cluster='tele status | grep "Cluster" | cut -f 2'

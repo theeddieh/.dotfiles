@@ -2,10 +2,10 @@
 	"folders": [
 		{
 			"path": "/Users/eddie/.dotfiles"
-		},
-		{
-			"path": "/Users/eddie/dotfiles"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"workbench.colorTheme": "Cobalt Blue",
+		"workbench.iconTheme": "windows-xp-icons"
+	}
 }
