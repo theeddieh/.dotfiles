@@ -26,7 +26,7 @@ hlp="${helper_base}/${bin_sdp_helper}"
 srv="${service_base}/${bin_service}"
 drv="${driver_base}/${bin_driver}"
 
-binary_paths=(
+binary_path_list=(
     "${sdp}"
     "${hlp}"
     "${srv}"
@@ -81,7 +81,7 @@ log_files=(
 maxwidth=60
 
 check_appgate_files() {
-    for p in "${binary_paths[@]}" "${helper_scripts[@]}" "${plist_files[@]}" "${log_files[@]}"; do
+    for p in "${binary_path_list[@]}" "${helper_scripts[@]}" "${plist_files[@]}" "${log_files[@]}"; do
         which -s "${p}"
         echo $? " ${p}"
     done
@@ -228,7 +228,7 @@ copy_password() {
         echo "[!] brew install lastpass-cli"
     elif [[ $(lpass status --quiet) -ne 0 ]]; then
         echo "[!] You nedd to log in to LastPass first, try:"
-        echo "[!] lpass login theeddieharrison@gmail.com"
+        echo "[!] lpass login you@e.g.com"
     else
         lpass sync
         lpass show --clip --password ${domain}
@@ -236,11 +236,11 @@ copy_password() {
 }
 
 set_gov_cloud() {
-    set_environment "GovCloud" "https://appgate-controller-0.identity.gov.msap.io/" "GOV2_IPA" "gov.msap.io"
+    set_environment "GovCloud" "https://appgate-controller.identity.gov.e.g.com/" "GOV_IPA" "gov.e.g.com"
 }
 
 set_com_cloud() {
-    set_environment "ComCloud" "https://appgate-controller-0.identity.msap.io/" "FED_IPA" "prod.identity.msap.io"
+    set_environment "ComCloud" "https://appgate-controller.identity.e.g.com/" "FED_IPA" "prod.identity.e.g.com"
 }
 
 # $1: name
@@ -256,6 +256,9 @@ set_environment() {
 
 show_usage() {
     echo "apg: AppGate Assistant script"
+    echo "      a command line interface for the"
+    echo "      AppGate SDP MacOS client that"
+    echo "      makes switching vpns much faster"
     echo
     echo "Usage:"
     echo "  apg [command]"
