@@ -4,6 +4,8 @@ alias bashedit='nano ~/.bash_profile'
 alias reload='source ~/.bash_profile'
 
 alias l='ls -Al -FGho'
+alias ll='ls -lhaG'
+alias lt-original='ls -latrG'
 alias lt='ls -Al -FGho -rtT'
 alias lt-create='ls -Al -FGho -rtT -U'
 alias lt-access='ls -Al -FGho -rtT -u'

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 alias g=git
-alias h=hub
+# alias h=hub
 
 # this is pretty roundabout to get the formatting right...
 print_git_aliases()  {
