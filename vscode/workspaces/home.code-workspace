@@ -1,0 +1,40 @@
+{
+	"folders": [
+		{
+			"path": "/Users/eddie/.aws"
+		},
+		{
+			"path": "/Users/eddie/.bash_sessions"
+		},
+		{
+			"path": "/Users/eddie/.cache"
+		},
+		{
+			"path": "/Users/eddie/.config"
+		},
+		{
+			"path": "/Users/eddie/.docker"
+		},
+		{
+			"path": "/Users/eddie/.dotfiles"
+		},
+		{
+			"path": "/Users/eddie/.dropbox"
+		},
+		{
+			"path": "/Users/eddie/.local"
+		},
+		{
+			"path": "/Users/eddie/.npm"
+		},
+		{
+			"path": "/Users/eddie/.oh-my-zsh"
+		},
+		{
+			"path": "/Users/eddie/.ssh"
+		},
+		{
+			"path": "/Users/eddie/workarea"
+		}
+	]
+}
