@@ -3,5 +3,10 @@
 		{
 			"path": "/Users/eddie/workarea"
 		}
-	]
+	],
+	"settings": {
+		"workbench.colorTheme": "Cobalt Blue",
+		"workbench.iconTheme": "windows-xp-icons",
+		"makefile.extensionOutputFolder": "./.vscode"
+	}
 }

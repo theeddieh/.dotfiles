@@ -19,9 +19,6 @@
 			"path": "/Users/eddie/.dotfiles"
 		},
 		{
-			"path": "/Users/eddie/.dropbox"
-		},
-		{
 			"path": "/Users/eddie/.local"
 		},
 		{
@@ -36,5 +33,8 @@
 		{
 			"path": "/Users/eddie/workarea"
 		}
-	]
+	],
+	"settings": {
+		"makefile.extensionOutputFolder": "./.vscode"
+	}
 }
