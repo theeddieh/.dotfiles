@@ -49,6 +49,10 @@ source ${DOTFILES}/git/git-prompt.sh
 export PROMPT_COMMAND='__posh_git_ps1 "[`__battery_status`]  \W " "\n▷  ";'$PROMPT_COMMAND
 
 # ALIASES and FUNCTIONS
+
+# List alias files
+find ${DOTFILES} -name aliases.sh | sort
+
 for file in $(find ${DOTFILES} -name aliases.sh); do
     source ${file}
 done
