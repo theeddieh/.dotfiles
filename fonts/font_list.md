@@ -9,4 +9,6 @@
 4. [Work Sans](http://charlix.cx/Work-Sans/)
     - https://github.com/weiweihuanghuang/Work-Sans/releases/tag/v2.010
 5. [Apple Garamond](https://fontcatalog.apple.com/font/apple-garamond)
-6. [Helvetica](https://fontcatalog.apple.com/font/helvetica)
+7. [Helvetica](https://fontcatalog.apple.com/font/helvetica)
+8. [IBM Plex](https://www.ibm.com/plex/)
+    - https://github.com/IBM/plex
