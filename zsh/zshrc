@@ -1,11 +1,7 @@
-
 DOTFILES="${HOME}/.dotfiles"
 
 # ln -s "${DOTFILES}/git/config ${HOME}/.gitconfig"
-
 # ALIASES
-source ${DOTFILES}/git/aliases.sh
-source ${DOTFILES}/ssh/aliases.sh
 source ${DOTFILES}/vscode/aliases.sh
 source ${DOTFILES}/zsh/aliases.sh
 
@@ -25,8 +21,6 @@ fi
 export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${PATH}"
 
 # PROMPT changes
-precmd () { 
-    __posh_git_ps1 "$(__battery_status)" " %~ ▷ "  
+precmd() {
+    __posh_git_ps1 "$(__battery_status)" " %~ ▷ "
 }
-
-

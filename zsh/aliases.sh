@@ -1,4 +1,3 @@
-
 alias reload='source ~/.zshrc'
 alias zshedit='nano ~/.zshrc'
 
@@ -15,6 +14,8 @@ alias ls-path='tr : \\'\n\\' <<<$PATH'
 
 alias today='date +"%Y/%m/%d"'
 alias fancydate='date +"It is %r %Z on %A, %B %d, Anno Domini %Y."'
+
+alias unix-timestamp='date "+%s"'
 alias timestamp='date +"%Y%m%d_%H%M%S"'
 
 alias moon='curl wttr.in/moon'
@@ -28,7 +29,6 @@ diffault() {
         --minimal \
         --side-by-side \
         --width=180 \
-        ${1} ${2} \
-        | colordiff
+        ${1} ${2} |
+        colordiff
 }
-
