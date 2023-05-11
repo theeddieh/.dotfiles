@@ -17,20 +17,15 @@ print_git_aliases()  {
 }
 
 list_status() {
-    # files=$(git status --short)
-    # for file in ${files[@]}; do
-    #     echo ${file}
-    # done
-
-    # lsst = !ls -aFGho $(
-    git status --short | awk {'printf(" %s \n", $1); printf("\n|%s|\n", $0)'}
+    git status --short \
+        | awk {'printf(" %s \n", $1); printf("\n|%s|\n", $0)'}
 }
 
-refresh_master() {
+refresh_main() {
     branch=$(git symbolic-ref --short HEAD)
-    git checkout master
+    git checkout main
     git fetch origin
-    git merge origin/master --ff-only
+    git merge origin/main --ff-only
     git checkout ${branch}
 }
 
