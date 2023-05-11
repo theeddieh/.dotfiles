@@ -5,7 +5,7 @@
 		}
 	],
 	"settings": {
-		"workbench.colorTheme": "Cobalt Blue",
+		"workbench.colorTheme": "Markdown Editor",
 		"workbench.iconTheme": "windows-xp-icons",
 		"makefile.extensionOutputFolder": "./.vscode"
 	}
