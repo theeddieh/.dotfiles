@@ -20,6 +20,8 @@ alias weather='curl wttr.in'
 
 alias bless-you='say --voice Anna gesundheit'
 
+alias newline='printf "\n"'
+
 # Simple default diff
 diffault() {
     diff --ignore-all-space \
