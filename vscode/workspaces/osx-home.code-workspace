@@ -1,22 +1,25 @@
 {
 	"folders": [
 		{
-			"path": "/Users/eddie/Desktop"
+			"path": "~/Desktop"
 		},
 		{
-			"path": "/Users/eddie/Documents"
+			"path": "~/Documents"
 		},
         {
-			"path": "/Users/eddie/Downloads"
+			"path": "~/Downloads"
 		},
 		{
-			"path": "/Users/eddie/Movies"
+			"path": "~/Movies"
 		},
         {
-			"path": "/Users/eddie/Music"
+			"path": "~/Music"
 		},
 		{
-			"path": "/Users/eddie/Pictures"
+			"path": "~/Pictures"
+		},
+		{
+			"path": "~/workarea"
 		}
 	]
 }
