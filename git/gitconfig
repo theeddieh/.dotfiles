@@ -1,8 +1,4 @@
-# This is Git's per-user configuration file.
-[user]
-	name = Ed Harrison
-	email = ed.harrison@apple.com
-    
+
 [color]
     ui = always
 
@@ -47,7 +43,8 @@
     rims = rebase --interactive master --exec 'git commit --amend --gpg-sign --no-edit --no-verify --reset-author'
 
     sign = commit --amend --no-edit --gpg-sign
-    unsign = commit --amend --no-edit
+    unsign = commit --amend --no-
+    
     list-signed = ! source ~/.dotfiles/git/aliases.sh && list_signed_commits
     # exits with 0 if the given hash is signed
     is-signed = ! source ~/.dotfiles/git/aliases.sh && is_commit_signed
